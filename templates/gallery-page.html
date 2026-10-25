@@ -12,13 +12,14 @@
                 </div>
             </div>
         </header>
-        <section class="section gallery">
+        <section class="section gallery pswp-gallery pswp-gallery--single-column" id="gallery">
             <div class="container container-wide">
                 <div class="row">
                     {% for asset in section.assets | reverse %}
                     <div class="col twelve six-sm four-md three-lg">
                         <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="gallery-item">
-                            <a itemprop="contentUrl" href="{{ asset }}">
+                            {% set metadata = get_image_metadata(path=asset) %}
+                            <a itemprop="contentUrl" href="{{ asset }}" data-pswp-width="{{ metadata.width }}" data-pswp-height="{{ metadata.height }}" >
                                 {% set image = resize_image(path=asset, height=152, op="fit_height") %}
                                 <img itemprop="thumbnail" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
                             </a>
@@ -30,4 +31,14 @@
         </section>
     </article>
 </main>
+<script type="module">
+    import PhotoSwipeLightbox from '{{ get_url(path="/photoswipe-lightbox.esm.js") }}';
+    const lightbox = new PhotoSwipeLightbox({
+        gallery: '#gallery',
+        children: 'a',
+        pswpModule: () => import('{{ get_url(path="/photoswipe.esm.js") }}')
+    });
+    lightbox.init();
+</script>
+<link rel="stylesheet" href="{{ get_url(path='/photoswipe.css') }}">
 {% endblock %}
