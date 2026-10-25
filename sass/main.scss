@@ -30,10 +30,10 @@ body {
   margin: 0;
   padding: 0;
   color: #555;
-  font-size: 1em;
+  font-size: 20px;
   font-weight: normal;
   font-family: 'Fira Sans', 'Helvetica Neue', Arial, sans-serif;
-  line-height: 1.5;
+  line-height: 1.4;
   background: $dark-background url('dark-background.png');
   -webkit-font-smoothing: antialiased;
   -webkit-text-size-adjust: 100%;
@@ -51,7 +51,6 @@ h1, h2, h3 {
   padding: 0;
   font-weight: 500;
   line-height: 1.2;
-  letter-spacing: -1px;
 }
 
 h1 {
@@ -74,7 +73,7 @@ p {
 
 code {
   font-family: 'Fira Code', monospace;
-  font-size: 1rem;
+  font-size: 18px;
 }
 
 pre {
@@ -85,8 +84,7 @@ pre {
     display: block;
     padding: 10px;
     color: #FBF1C7;
-    font-size: 16px;
-    line-height: 1.25;
+    font-size: 18px;
     background: $dark-background;
     overflow-x: auto;
   }
@@ -332,12 +330,6 @@ body.overlay-open {
   }
 }
 
-.summary {
-  padding-bottom: 1rem;
-  font-size: 1.4em;
-  color: #CCC;
-}
-
 .article-list {
   padding: 20px 0;
 }
@@ -379,6 +371,7 @@ body.overlay-open {
 
 .footer {
   padding: 20px 0;
+  font-size: 16px;
   color: #DDD;
   text-align: center;
   background: $dark-background url('dark-background.png');
