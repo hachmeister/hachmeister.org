@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <article itemscope itemtype="https://schema.org/TechArticle">
+        <link itemprop="mainEntityOfPage" href="{{ current_url }}" />
+        <header class="page-header">
+            <div class="container">
+                <div class="row">
+                    <div class="col twelve">
+                        <div class="article-metadata">
+                            <time itemprop="datePublished" datetime="{{ page.date | date(format='%Y-%m-%d') }}">{{ page.date | date(format="dd. MMMM yyyy", locale="de_DE") }}</time>
+                        </div>
+                    </div>
+                </div>
+                <div class="row">
+                    <div class="col twelve">
+                        <h1 itemprop="headline">{{ page.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="section">
+            <div class="container">
+                <div class="row">
+                    <div class="col twelve">
+                        <div itemprop="description" class="summary">
+                            <p>{{ page.description | safe }}</p>
+                        </div>
+                        <div itemprop="articleBody">
+                            {{ page.content | safe }}
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+{% endblock %}

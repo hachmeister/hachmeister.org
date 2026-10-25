@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/CollectionPage">
+    <header class="page-header">
+        <div class="container">
+            <div class="row">
+                <div class="col twelve">
+                    <h1 itemprop="name">{{ section.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section article-list">
+        <div class="container">
+            <div class="row">
+                <div class="col twelve">
+                    {% for page in section.pages %}
+                    <article itemprop="hasPart" itemscope itemtype="https://schema.org/TechArticle" class="article-item">
+                        <header>
+                            <h2 itemprop="headline">
+                                <a itemprop="url" href="{{ page.permalink | safe }}">{{ page.title }}</a>
+                            </h2>
+                        </header>
+                        <p itemprop="abstract">{{ page.description }}</p>
+                    </article>
+                    {% endfor %}
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

@@ -1,0 +1,17 @@
+<header class="site-header">
+    <nav itemscope itemtype="https://schema.org/SiteNavigationElement" class="site-nav">
+        <ul>
+            {%- for item in config.extra.main_menu -%}
+            {% set item_url = get_url(path=item.url) -%}
+            {% set is_exact = item.exact | default(value=false) -%}
+            {% set is_active = false -%}
+            {% if is_exact and current_url == item_url -%}
+                {% set is_active = true -%}
+            {% elif not is_exact and current_url is starting_with(pat=item_url) -%}
+                {% set is_active = true -%}
+            {% endif %}
+            <li><a href="{{ item_url }}" class="{% if is_active %}active{% endif %}">{{ item.name }}</a></li>
+            {%- endfor %}
+        </ul>
+    </nav>
+</header>

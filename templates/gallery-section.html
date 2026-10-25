@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/CollectionPage">
+    <header class="page-header">
+        <div class="container container-wide">
+            <div class="row">
+                <div class="col twelve">
+                    <h1 itemprop="name">{{ section.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section gallery-list">
+        <div class="container container-wide">
+            <div class="row">
+                {% for entry in section.subsections %}
+                {% set subsection = get_section(path=entry) %}
+                <div itemprop="hasPart" itemscope itemtype="https://schema.org/ImageGallery" class="col twelve six-sm four-md three-lg">
+                    <figure class="gallery-item">
+                        <a itemprop="url" href="{{ subsection.path }}">
+                            {% set image = resize_image(path=subsection.assets | last, height=152, op="fit_height") %}
+                            <img itemprop="image" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
+                        </a>
+                    </figure>
+                    <p itemprop="name" style="text-align: center;">{{ subsection.title }}</p>
+                </div>
+                {% endfor %}
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}

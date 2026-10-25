@@ -1,0 +1,33 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main>
+    <article itemscope itemtype="https://schema.org/ImageGallery">
+        <header class="page-header">
+            <div class="container container-wide">
+                <div class="row">
+                    <div class="col twelve">
+                        <h1 itemprop="name">{{ section.title }}</h1>
+                    </div>
+                </div>
+            </div>
+        </header>
+        <section class="section gallery">
+            <div class="container container-wide">
+                <div class="row">
+                    {% for asset in section.assets | reverse %}
+                    <div class="col twelve six-sm four-md three-lg">
+                        <figure itemprop="associatedMedia" itemscope itemtype="http://schema.org/ImageObject" class="gallery-item">
+                            <a itemprop="contentUrl" href="{{ asset }}">
+                                {% set image = resize_image(path=asset, height=152, op="fit_height") %}
+                                <img itemprop="thumbnail" src="{{ image.url }}" width="{{ image.width }}" height="{{ image.height }}"/>
+                            </a>
+                        </figure>
+                    </div>
+                    {% endfor %}
+                </div>
+            </div>
+        </section>
+    </article>
+</main>
+{% endblock %}

@@ -1,0 +1,42 @@
+{% extends "base.html" %}
+
+{% block content %}
+<main itemscope itemtype="https://schema.org/WebPage">
+    <div itemscope itemtype="https://schema.org/WebSite">
+        <meta itemprop="name" content="hachmeister.org">
+        <meta itemprop="url" content="https://hachmeister.org/">
+    </div>
+
+    <header class="page-header page-header-home">
+        <div class="container">
+            <div class="row">
+                <div class="col twelve">
+                    <h1 itemprop="name">{{ section.title }}</h1>
+                </div>
+            </div>
+        </div>
+    </header>
+    <section class="section section-showcase">
+        <div class="container">
+            <div class="row">
+                {% set artikel = get_section(path="artikel/_index.md") %}
+                {% for page in artikel.pages[0:3] %}
+                <div class="col twelve {% if loop.index > 1 %}six-md{% endif %}">
+                    <article itemprop="hasPart" itemscope itemtype="http://schema.org/TechArticle" class="article-item">
+                        <header>
+                            <h3 itemprop="headline">
+                                <a itemprop="url" href="{{ page.permalink }}">{{ page.title }}</a>
+                            </h3>
+                        </header>
+                        <p itemprop="abstract">{{ page.description }}</p>
+                    </article>
+                </div>
+                {% endfor %}
+                <div class="col twelve">
+                    <p><a href="{{ get_url(path='@/artikel/_index.md') }}">Alle Artikel →</a></p>
+                </div>
+            </div>
+        </div>
+    </section>
+</main>
+{% endblock %}
