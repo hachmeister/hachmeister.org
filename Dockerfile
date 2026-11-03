@@ -4,6 +4,10 @@ COPY . /project
 WORKDIR /project
 RUN ["/zola", "build"]
 
-FROM ghcr.io/static-web-server/static-web-server:2
+FROM ghcr.io/static-web-server/static-web-server:2.44.1
 WORKDIR /
 COPY --from=zola /project/public /public
+
+LABEL wud.watch="true"
+LABEL wud.tag.include="^\d+\.\d+\.\d+$"
+LABEL wud.tag.semver="true"
